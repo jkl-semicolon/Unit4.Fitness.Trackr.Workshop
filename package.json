@@ -1,5 +1,16 @@
 {
   "dependencies": {
     "pg": "^8.11.5"
-  }
+  },
+  "name": "unit4.fitness.tracker.workshop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed:dev": "node ./db/seed.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
