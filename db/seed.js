@@ -1,4 +1,5 @@
 import client from "./client.js";
+const log = console.log;
 
 const addRoutineAndCheck = async () => {
   try {
@@ -9,21 +10,32 @@ const addRoutineAndCheck = async () => {
     const checking = await client.query(`
       SELECT * FROM routines;
     `)
-    console.log(checking);
+    log('I am checking', checking);
   } catch (err) {
-    console.log(err);
+    log(err);
+  }
+}
+
+const emptyTables = async () => {
+  try {
+    const t = ['routines_activities', 'routines', 'activities'];
+    for (let i=0; i<t.length; i++) await client.query(`DELETE FROM ${t[i]};`);
+  } catch (err) {
+    log(err);
   }
 }
 
 const syncAndSeed = async() => {
   await client.connect();
-  console.log('connected to database');
+  log('connected to database');
 
   await addRoutineAndCheck();
-  console.log('test administered');
+
+  await emptyTables();
+  log('tables emptied');
 
   await client.end();
-  console.log('end database connection');
+  log('end database connection');
 }
 
 syncAndSeed();
