@@ -1,1 +1,0 @@
-import { activities } from "./data.js";

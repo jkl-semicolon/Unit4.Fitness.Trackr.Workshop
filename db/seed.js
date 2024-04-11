@@ -1,5 +1,6 @@
 import client from "./client.js";
-import { routines, activities, routines_activities, shuffle } from './data.js';
+import { routines, activities, routines_activities } from './data.js';
+
 const log = console.log;
 
 const addTestRoutines = async (routines) => {
@@ -31,14 +32,16 @@ const addTestActivities = async (activities) => {
 const addTestRoutinesActivities = async (routines_activities) => {
   try {
     let routinesObj = await client.query(`SELECT id FROM routines;`);
-    const routineIds = shuffle(routinesObj.rows);
+    const routineIds = routinesObj.rows;
     let activitiesObj = await client.query(`SELECT id FROM activities;`);
-    const activityIds = shuffle(activitiesObj.rows);
+    const activityIds = activitiesObj.rows;
 
     for (let i=0; i<routines_activities.length; i++) {
+      const rId = routineIds[(Math.floor(Math.random() * routineIds.length))].id;
+      const aId = activityIds[(Math.floor(Math.random() * activityIds.length))].id;
       await client.query(`
       INSERT INTO routines_activities (routine_id, activity_id, count)
-      VALUES (${routineIds[i].id}, ${activityIds[i].id}, ${routines_activities[i].count});
+      VALUES (${rId}, ${aId}, ${routines_activities[i].count});
       `)
     }
   } catch (err) {
