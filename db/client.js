@@ -40,8 +40,8 @@ ii. either create the tables for routines, activities, and routines_activities i
 
 SQL:  CREATE TABLE routines_activities (
         id SERIAL PRIMARY KEY
-        routine_id INT FOREIGN KEY REFERENCES routines(id),
-        activity_id INT FOREIGN KEY REFERENCES activities(id),
+        routine_id INT REFERENCES routines(id), // NOTE: PSQL DOES NOT NEED FOREIGN KEY KEYWORDS
+        activity_id INT REFERENCES activities(id),
         count INT
       );
 

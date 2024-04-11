@@ -95,86 +95,27 @@ const routines = [
 ];
 
 /**
+ * Used this shuffle function earlier, but not anymore. Left it in for now because it could be useful.
+ * 
  * Fisher-Yates Shuffle, sourced from: https://bost.ocks.org/mike/shuffle/.
  * To help randomize players for function setTurnOrder, and for shuffling tiles in bag.
  * @param {array}, array of player objects 
  * @returns {array}, array of shuffled player objects
- */
-const shuffle = (array) => {
-  let m = array.length, t, i;
-  while (m) {
-    i = Math.floor(Math.random() * m--);
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
-  };
-  return array;
-};
-
-const nums = [];
-const nums2 = [];
-(function r_a_setup () {
-  for (let i=1; i<11; i++) {
-    nums.push(i);
-    nums2.push(i);
-  }
-  shuffle(nums);
-  shuffle(nums2);
-})();
+//  */
+// const shuffle = (array) => {
+//   let m = array.length, t, i;
+//   while (m) {
+//     i = Math.floor(Math.random() * m--);
+//     t = array[m];
+//     array[m] = array[i];
+//     array[i] = t;
+//   };
+//   return array;
+// };
 
 const myRand = () => {return Math.floor(Math.random() * 101)};
+// routine_id and activity_id in routines_activities to be defined in seed.js
+const routines_activities = []
+for (let i=0; i<10; i++) routines_activities.push({count: myRand()});
 
-const routines_activities = [
-  {
-    routine_id: nums.pop(),
-    activity_id: nums2.pop(),
-    count: myRand()
-  },
-  {
-    routine_id: nums.pop(),
-    activity_id: nums2.pop(),
-    count: myRand()
-  },
-  {
-    routine_id: nums.pop(),
-    activity_id: nums2.pop(),
-    count: myRand() 
-  },
-  {
-    routine_id: nums.pop(),
-    activity_id: nums2.pop(),
-    count: myRand()
-  },
-  {
-    routine_id: nums.pop(),
-    activity_id: nums2.pop(),
-    count: myRand()
-  },
-  {
-    routine_id: nums.pop(),
-    activity_id: nums2.pop(),
-    count: myRand()
-  },
-  {
-    routine_id: nums.pop(),
-    activity_id: nums2.pop(),
-    count: myRand()
-  },
-  {
-    routine_id: nums.pop(),
-    activity_id: nums2.pop(),
-    count: myRand()
-  },
-  {
-    routine_id: nums.pop(),
-    activity_id: nums2.pop(),
-    count: myRand()
-  },
-  {
-    routine_id: nums.pop(),
-    activity_id: nums2.pop(),
-    count: myRand()
-  }
-];
-
-export { routines, activities, routines_activities, shuffle }
+export { routines, activities, routines_activities }

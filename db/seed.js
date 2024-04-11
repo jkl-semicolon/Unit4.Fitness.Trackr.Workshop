@@ -1,14 +1,18 @@
+import { log } from 'console';
+
 import client from "./client.js";
 import { routines, activities, routines_activities } from './data.js';
+// import { getActivities } from './activities.js';
 
-const log = console.log;
-
+// Even though I have individual .js modules for each of the tables, I decided to leave these below functions here because they
+// seed the initial hardcoded data to our tables in our database. Will have variations of them for app.post methods
+// in their respective .js modules. A bit repeaty, but we can just optimize later.
 const addTestRoutines = async (routines) => {
   try {
     for (let i=0; i<routines.length; i++) {
       await client.query(`
-      INSERT INTO routines (is_public, name, goal)
-      VALUES (${routines[i].is_public}, '${routines[i].name}', '${routines[i].goal}');
+        INSERT INTO routines (is_public, name, goal)
+        VALUES (${routines[i].is_public}, '${routines[i].name}', '${routines[i].goal}');
       `)
     }
   } catch (err) {
@@ -20,8 +24,8 @@ const addTestActivities = async (activities) => {
   try {
     for (let i=0; i<activities.length; i++) {
       await client.query(`
-      INSERT INTO activities (name, description)
-      VALUES ('${activities[i].name}', '${activities[i].description}');
+        INSERT INTO activities (name, description)
+        VALUES ('${activities[i].name}', '${activities[i].description}');
       `)
     }
   } catch (err) {
@@ -40,8 +44,8 @@ const addTestRoutinesActivities = async (routines_activities) => {
       const rId = routineIds[(Math.floor(Math.random() * routineIds.length))].id;
       const aId = activityIds[(Math.floor(Math.random() * activityIds.length))].id;
       await client.query(`
-      INSERT INTO routines_activities (routine_id, activity_id, count)
-      VALUES (${rId}, ${aId}, ${routines_activities[i].count});
+        INSERT INTO routines_activities (routine_id, activity_id, count)
+        VALUES (${rId}, ${aId}, ${routines_activities[i].count});
       `)
     }
   } catch (err) {
