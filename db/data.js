@@ -85,7 +85,7 @@ const routines = [
   {
     is_public: false,
     name: 'The shortest war poem',
-    goal: `“Fleas” by American poet Ogden Nash consists of just two words: “Adam / Had 'em.”`
+    goal: '`Fleas` by American poet Ogden Nash consists of just two words: Adam / Had `em.'
   }, // may cause issue, keep an eye out
   {
     is_public: true,
@@ -177,4 +177,4 @@ const routines_activities = [
   }
 ];
 
-export { routines, activities, routines_activities }
+export { routines, activities, routines_activities, shuffle }
