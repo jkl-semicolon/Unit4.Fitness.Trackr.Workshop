@@ -5,7 +5,7 @@ import { routines, activities, routines_activities } from './data.js';
 
 // Even though I have individual .js modules for each of the tables, I decided to leave these below functions here because they
 // seed the initial hardcoded data to our tables in our database. Will have variations of them for app.post methods
-// in their respective .js modules. A bit repeaty, but we can just optimize later.
+// in their respective .js modules. A bit repeaty, but we can just optimize later if we'd like.
 const addTestRoutines = async (routines) => {
   try {
     for (let i=0; i<routines.length; i++) {
@@ -61,6 +61,8 @@ const emptyTables = async () => {
   }
 }
 
+// Decided not to delete and create the tables everytime syncAndSeed is called.
+// Its nice watching the serial ids go up.
 const syncAndSeed = async () => {
   await client.connect();
   log('connected to database');

@@ -33,4 +33,16 @@ const newActivity = async (activity) => {
   }
 }
 
-export { getActivities, getActivity, newActivity }
+const deleteActivity = async (id) => {
+  try {
+    const {rows:[mySql]} = await client.query(`
+      DELETE FROM activities WHERE id = ${id}
+      RETURNING *;
+    `)
+    return mySql;
+  } catch (err) {
+    log(err);
+  }
+}
+
+export { getActivities, getActivity, newActivity, deleteActivity }

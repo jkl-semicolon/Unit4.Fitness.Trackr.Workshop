@@ -1,8 +1,8 @@
 import { log } from 'console';
 import express from 'express';
 
-import { getActivities, getActivity, newActivity } from './db/activities.js';
-import { getRoutines, getRoutine, newRoutine } from './db/routines.js';
+import { getActivities, getActivity, newActivity, deleteActivity } from './db/activities.js';
+import { getRoutines, getRoutine, newRoutine, deleteRoutine } from './db/routines.js';
 import { newRoutineActivity } from './db/routines_activities.js';
 import client from './db/client.js';
 
@@ -94,6 +94,36 @@ app.post('/api/v1/routines_activities', async (req, res) => {
   } catch (err) {
     res.send({success: false})
     log (err);
+  }
+})
+
+app.delete('/api/v1/activities/:id', async (req, res) => {
+  try {
+    const {id} = req.params;
+    const myObj = await deleteActivity(id);
+    const sendObj = {
+      success: myObj ? true : false,
+      deleted: myObj
+    }
+    res.send(sendObj);
+  } catch (err) {
+    res.send({success: false});
+    log(err);
+  }
+})
+
+app.delete('/api/v1/routines/:id', async (req, res) => {
+  try {
+    const {id} = req.params;
+    const myObj = await deleteRoutine(id);
+    const sendObj = {
+      success: myObj ? true : false,
+      deleted: myObj
+    }
+    res.send(sendObj);
+  } catch (err) {
+    res.send({success: false});
+    log(err);
   }
 })
 

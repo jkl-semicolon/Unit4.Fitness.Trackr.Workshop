@@ -33,4 +33,16 @@ const newRoutine = async (routine) => {
   }
 }
 
-export { getRoutines, getRoutine, newRoutine }
+const deleteRoutine = async (id) => {
+  try {
+    const {rows:[mySql]} = await client.query(`
+      DELETE FROM routines WHERE id = ${id}
+      RETURNING *;
+    `)
+    return mySql;
+  } catch (err) {
+    log(err);
+  }
+}
+
+export { getRoutines, getRoutine, newRoutine, deleteRoutine }
