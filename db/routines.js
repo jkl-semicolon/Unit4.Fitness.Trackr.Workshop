@@ -20,4 +20,17 @@ const getRoutine = async (id) => {
   }
 }
 
-export { getRoutines, getRoutine }
+const newRoutine = async (routine) => {
+  try {
+    const {rows:[myRou]} = await client.query(`
+      INSERT INTO routines (is_public, name, goal)
+      VALUES (${routine.is_public}, '${routine.name}', '${routine.goal}')
+      RETURNING *;
+    `)
+    return myRou;
+  } catch (err) {
+    log (err);
+  }
+}
+
+export { getRoutines, getRoutine, newRoutine }

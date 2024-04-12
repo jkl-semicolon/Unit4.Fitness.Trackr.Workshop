@@ -2,7 +2,6 @@ import { log } from 'console';
 
 import client from "./client.js";
 import { routines, activities, routines_activities } from './data.js';
-// import { getActivities } from './activities.js';
 
 // Even though I have individual .js modules for each of the tables, I decided to leave these below functions here because they
 // seed the initial hardcoded data to our tables in our database. Will have variations of them for app.post methods
@@ -35,9 +34,9 @@ const addTestActivities = async (activities) => {
 
 const addTestRoutinesActivities = async (routines_activities) => {
   try {
-    let routinesObj = await client.query(`SELECT id FROM routines;`);
+    const routinesObj = await client.query(`SELECT id FROM routines;`);
     const routineIds = routinesObj.rows;
-    let activitiesObj = await client.query(`SELECT id FROM activities;`);
+    const activitiesObj = await client.query(`SELECT id FROM activities;`);
     const activityIds = activitiesObj.rows;
 
     for (let i=0; i<routines_activities.length; i++) {
