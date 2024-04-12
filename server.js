@@ -57,7 +57,7 @@ app.get('/api/v1/routines/:id', async (req, res) => {
 
 app.post('/api/v1/activities', async (req, res) => {
   try {
-    const { rows: [newAct] } = await newActivity(req.body);
+    const { rows: [newAct] } = await newActivity(req.body); // lets destructure here instead of there
     const sendObj = {
       success: newAct ? true : false,
       added: newAct
